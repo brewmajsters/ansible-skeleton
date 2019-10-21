@@ -1,0 +1,21 @@
+---
+
+- hosts: localhost
+  vars:
+    distro: debian/buster/amd64
+    container_name: pseudo-raspbian
+  tasks:
+    - name: Create a started container
+      lxd_container:
+        name: "{{ container_name }}"
+        state: started
+        source:
+          type: image
+          mode: pull
+          server: https://images.linuxcontainers.org
+          protocol: simplestreams
+          alias: "{{ distro }}"
+        profiles: ["default"]
+        wait_for_ipv4_addresses: true
+        timeout: 600
+      register: lxd_info

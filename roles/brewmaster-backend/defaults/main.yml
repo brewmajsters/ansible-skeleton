@@ -1,0 +1,7 @@
+---
+# defaults file for brewmaster-backend
+
+repo:
+  dest: "/tmp/backend"
+
+develop: false

@@ -1,0 +1,57 @@
+---
+# tasks file for brewmaster-backend
+
+- block:
+  - name: install dependencies
+    become: true
+    package:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ dependencies }}"
+    tags: install
+
+  - include_role:
+      name: contrib/pip
+    vars:
+      python_version: 3
+      pip_packages:
+        - pipenv
+
+- name: GIT | clone backend repository
+  git:
+    repo: "{{ repo['url'] }}"
+    version: "{{ repo['version'] | default(omit) }}"
+    dest: "{{ repo['dest'] }}"  # "{{ repo['dest'].startswith('/') | ternary(repo['dest'], ansible_env.HOME + repo['dest']) }}"
+  tags: install
+
+- name: PIPENV | install backend application
+  become: true
+  command: "{{ item }}"
+  args:
+    chdir: "{{ repo['dest'] }}"
+  loop:
+    - "pipenv sync"
+    - "pipenv install {{ develop | ternary('', '--deploy --system') }}"
+  tags: install
+
+- name: SYSTEMD | flask server repo absolute path
+  command: "pwd"
+  args:
+    chdir: "{{ repo['dest'] }}"
+  register: repo_absolute_path
+
+- name: SYSTEMD | copy unit file
+  become: true
+  template:
+    src: "flask_unit_file.service.j2"
+    dest: "/etc/systemd/system/backend_api.service"
+  register: unit_file
+  notify: SYSTEMD | ensure service is started
+  tags: configure
+
+- name: SYSTEMD | ensure systemctl daemon is reloaded
+  become: true
+  when: unit_file.changed
+  systemd:
+    daemon_reload: true
+  tags: configure

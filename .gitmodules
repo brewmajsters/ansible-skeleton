@@ -1,0 +1,3 @@
+[submodule "roles/contrib/pip"]
+	path = roles/contrib/pip
+	url = https://github.com/Provizanta/ansible-role-pip.git

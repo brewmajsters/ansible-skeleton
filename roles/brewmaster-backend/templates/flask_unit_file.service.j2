@@ -1,0 +1,7 @@
+[Unit]
+Description="Backend Flask server application"
+After=network.target
+
+[Service]
+Environment=FLASK_APP={{ repo_absolute_path['stdout'] }}/application
+ExecStart=flask run

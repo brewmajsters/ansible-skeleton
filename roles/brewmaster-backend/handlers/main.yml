@@ -1,0 +1,8 @@
+---
+# handlers file for brewmaster-backend
+
+- name: SYSTEMD | ensure service is started
+  systemd:
+    name: backend_api
+    state: started
+  tags: configure
