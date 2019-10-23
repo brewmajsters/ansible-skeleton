@@ -46,7 +46,7 @@
     src: "flask_unit_file.service.j2"
     dest: "/etc/systemd/system/backend_api.service"
   register: unit_file
-  notify: SYSTEMD | ensure service is started
+  notify: SYSTEMD | ensure service is restarted
   tags: configure
 
 - name: SYSTEMD | ensure systemctl daemon is reloaded
