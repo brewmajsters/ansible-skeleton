@@ -13,7 +13,7 @@
   - include_role:
       name: contrib/pip
     vars:
-      python_version: 3
+      pip_version: 3
       pip_packages:
         - pipenv
 
