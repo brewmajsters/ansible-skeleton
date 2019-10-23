@@ -1,0 +1,8 @@
+---
+
+- name: SYSTEMD | ensure service is restarted
+  systemd:
+    name: "{{ frontend_service['name'] }}"
+    state: restarted
+    enabled: true
+  tags: configure

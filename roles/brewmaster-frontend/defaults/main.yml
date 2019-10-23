@@ -1,0 +1,11 @@
+---
+
+repo:
+  dest: "/tmp/frontend"
+
+frontend_service:
+  name: "frontend"
+
+npm:
+  run_scripts: "dev"
+  global: true

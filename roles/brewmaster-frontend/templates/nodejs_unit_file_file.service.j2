@@ -1,0 +1,6 @@
+[Unit]
+Description="Node.js frontend"
+After=network.target
+
+[Service]
+ExecStart=npm run-script "{{ npm['run_script'] }}"
