@@ -1,9 +1,16 @@
 ---
 # handlers file for brewmaster-backend
 
-- name: SYSTEMD | ensure service is restarted
+- name: SYSTEMD | backend restart
+  become: true
   systemd:
-    name: backend_api
+    name: "{{ backend_service['name'] }}"
     state: restarted
-    enabled: true
+  tags: configure
+
+- name: SYSTEMD | daemon reload
+  become: true
+  when: unit_file.changed
+  systemd:
+    daemon_reload: true
   tags: configure

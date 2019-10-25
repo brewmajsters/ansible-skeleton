@@ -44,14 +44,17 @@
   become: true
   template:
     src: "flask_unit_file.service.j2"
-    dest: "/etc/systemd/system/backend_api.service"
+    dest: "/etc/systemd/system/{{ backend_service['name'] }}.service"
   register: unit_file
-  notify: SYSTEMD | ensure service is restarted
+  notify:
+    - SYSTEMD | backend restart
+    - SYSTEMD | daemon reload
   tags: configure
 
-- name: SYSTEMD | ensure systemctl daemon is reloaded
+- name: SYSTEMD | start frontend
   become: true
-  when: unit_file.changed
   systemd:
-    daemon_reload: true
+    name: "{{ backend_service['name'] }}"
+    state: started
+    enabled: true
   tags: configure

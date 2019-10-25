@@ -4,4 +4,7 @@
 repo:
   dest: "/tmp/backend"
 
+backend_service:
+  name: "backend"
+
 develop: false
