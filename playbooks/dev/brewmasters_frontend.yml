@@ -1,0 +1,50 @@
+---
+
+- hosts: localhost
+  vars:
+    distro: debian/buster/amd64
+    container_name: pseudo-raspbian
+  tasks:
+    - name: Create a started container
+      lxd_container:
+        name: "{{ container_name }}"
+        state: started
+        source:
+          type: image
+          mode: pull
+          server: https://images.linuxcontainers.org
+          protocol: simplestreams
+          alias: "{{ distro }}"
+        profiles: ["default"]
+        wait_for_ipv4_addresses: true
+        timeout: 600
+      register: lxd_info
+
+  post_tasks:
+    - name: ADD HOST | add dynamic host
+      add_host:
+        name: "{{ container_name }}"
+        ansible_connection: lxd
+        ansible_python_interpreter: /usr/bin/python3
+        groups:
+          - raspbian
+
+- hosts: raspbian
+  gather_facts: false
+  become: true
+  tasks:
+    - name: RAW | install python3 on target
+      raw: "test -e {{ ansible_python_interpreter }} || apt -y update && apt install -y python3"
+      tags: install
+
+# all above requires installed lxd for testing purposes
+
+# the following is for frontend deployment to the newly created container
+# of course it's only a development setting
+
+- hosts: raspbian
+  roles:
+    - role: brewmaster-frontend
+      vars:
+        repo:
+          dest: "frontend"

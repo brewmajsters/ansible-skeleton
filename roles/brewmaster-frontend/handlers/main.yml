@@ -1,8 +1,15 @@
 ---
 
-- name: SYSTEMD | ensure service is restarted
+- name: SYSTEMD | frontend restart
+  become: true
   systemd:
     name: "{{ frontend_service['name'] }}"
     state: restarted
-    enabled: true
+  tags: configure
+
+- name: SYSTEMD | daemon reload
+  become: true
+  when: unit_file.changed
+  systemd:
+    daemon_reload: true
   tags: configure

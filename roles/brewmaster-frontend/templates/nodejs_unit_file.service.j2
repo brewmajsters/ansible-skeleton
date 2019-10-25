@@ -3,4 +3,5 @@ Description="Node.js frontend"
 After=network.target
 
 [Service]
+WorkingDirectory={{ repo_absolute_path.stdout }}
 ExecStart=npm run-script "{{ npm['run_script'] }}"

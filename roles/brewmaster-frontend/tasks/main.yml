@@ -11,15 +11,27 @@
 - name: GIT | clone brewmaster-frontend repository
   git:
     repo: "{{ repo['url'] }}"
-    version: "{{ repo['version'] }}"
+    version: "{{ repo['version'] | default(omit) }}"
     dest: "{{ repo['dest'] }}"
+    force: true
   tags: install
+
+- name: COPY | temporary develop webpack configuration file
+  copy:
+    src: "webpack.config.js"
+    dest: "{{ repo['dest'] }}/webpack.config.js"
+  tags: configure
 
 - name: NPM | install
   npm:
     path: "{{ repo['dest'] }}"
-    global: "{{ npm['global'] }}"
   tags: install
+
+- name: SYSTEMD | flask server repo absolute path
+  command: "pwd"
+  args:
+    chdir: "{{ repo['dest'] }}"
+  register: repo_absolute_path
 
 - name: SYSTEMD | copy unit file
   become: true
@@ -27,12 +39,15 @@
     src: "nodejs_unit_file.service.j2"
     dest: "/etc/systemd/system/{{ frontend_service['name'] }}.service"
   register: unit_file
-  notify: SYSTEMD | ensure service is restarted
+  notify:
+    - SYSTEMD | frontend restart
+    - SYSTEMD | daemon reload
   tags: configure
 
-- name: SYSTEMD | ensure systemctl daemon is reloaded
+- name: SYSTEMD | start frontend
   become: true
-  when: unit_file.changed
   systemd:
-    daemin_reload: true
+    name: "{{ frontend_service['name'] }}"
+    state: started
+    enabled: true
   tags: configure
