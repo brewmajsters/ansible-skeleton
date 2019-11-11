@@ -2,3 +2,5 @@
 *.log
 misc/*
 vault*
+
+*.pyc
