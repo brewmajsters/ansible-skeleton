@@ -2,7 +2,8 @@
 # defaults file for brewmaster-backend
 
 repo:
-  dest: "/tmp/backend"
+  dest: "backend"
+  url: "https://github.com/brewmajsters/brewmaster-backend.git"
 
 backend_service:
   name: "backend"

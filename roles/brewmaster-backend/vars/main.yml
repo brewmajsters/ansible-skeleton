@@ -3,6 +3,4 @@
 
 dependencies:
   - git
-
-repo:
-  url: "https://github.com/brewmajsters/brewmaster-backend.git"
+  - libpq-dev
