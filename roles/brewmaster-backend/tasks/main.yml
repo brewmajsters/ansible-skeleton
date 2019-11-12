@@ -20,18 +20,17 @@
 - name: GIT | clone backend repository
   git:
     repo: "{{ repo['url'] }}"
+    force: true
     version: "{{ repo['version'] | default(omit) }}"
     dest: "{{ repo['dest'] }}"  # "{{ repo['dest'].startswith('/') | ternary(repo['dest'], ansible_env.HOME + repo['dest']) }}"
   tags: install
 
 - name: PIPENV | install backend application
   become: true
-  command: "{{ item }}"
+  command: "pipenv install {{ develop | ternary('', '--deploy --system') }}"
   args:
     chdir: "{{ repo['dest'] }}"
-  loop:
-    - "pipenv sync"
-    - "pipenv install {{ develop | ternary('', '--deploy --system') }}"
+  changed_when: false
   tags: install
 
 - name: SYSTEMD | flask server repo absolute path
@@ -39,6 +38,7 @@
   args:
     chdir: "{{ repo['dest'] }}"
   register: repo_absolute_path
+  changed_when: false
 
 - name: SYSTEMD | copy unit file
   become: true
@@ -51,7 +51,7 @@
     - SYSTEMD | daemon reload
   tags: configure
 
-- name: SYSTEMD | start frontend
+- name: SYSTEMD | start backend
   become: true
   systemd:
     name: "{{ backend_service['name'] }}"
