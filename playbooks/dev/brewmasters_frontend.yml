@@ -29,20 +29,21 @@
         groups:
           - raspbian
 
-- hosts: raspbian
-  gather_facts: false
-  become: true
-  tasks:
-    - name: RAW | install python3 on target
-      raw: "test -e {{ ansible_python_interpreter }} || apt -y update && apt install -y python3"
-      tags: install
-
 # all above requires installed lxd for testing purposes
 
 # the following is for frontend deployment to the newly created container
 # of course it's only a development setting
 
 - hosts: raspbian
+  gather_facts: false
+  pre_tasks:
+    - name: RAW | install python3 on target
+      become: true
+      raw: "test -e {{ ansible_python_interpreter }} || apt -y update && apt install -y python3"
+      tags: install
+
+    - name: Gather facts
+      setup:
   roles:
     - role: brewmaster-frontend
       vars:
