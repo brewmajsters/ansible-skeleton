@@ -3,6 +3,3 @@
 dependencies:
   - git
   - npm
-
-repo:
-  url: "https://github.com/brewmajsters/brewmaster-frontend.git"
