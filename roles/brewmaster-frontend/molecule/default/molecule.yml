@@ -43,25 +43,37 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance-frontend
-    source:
-      type: image
-      mode: pull
-      server: https://images.linuxcontainers.org
-      protocol: simplestreams
-      alias: debian/buster/amd64
-    architecture: x86_64
-    config:
-      limits.cpu: "2"
-    devices:
-      kvm:
-        path: /dev/kvm
-        type: unix-char
-    profiles:
-      - default
-    force_stop: false
-    wait_for_ipv4_addresses: true
-    timeout: 60
+  # - name: instance-frontend
+  #   source:
+  #     type: image
+  #     mode: pull
+  #     server: https://images.linuxcontainers.org
+  #     protocol: simplestreams
+  #     alias: debian/buster/amd64
+  #   architecture: x86_64
+  #   config:
+  #     limits.cpu: "2"
+  #   devices:
+  #     kvm:
+  #       path: /dev/kvm
+  #       type: unix-char
+  #   profiles:
+  #     - default
+  #   force_stop: false
+  #   wait_for_ipv4_addresses: true
+  #   timeout: 60
+    - name: instance-frontend
+      state: started
+      source:
+        type: image
+        mode: pull
+        server: https://images.linuxcontainers.org
+        protocol: simplestreams
+        alias: debian/buster/amd64
+      profiles: ["default"]
+      wait_for_ipv4_addresses: true
+      timeout: 600
+
 provisioner:
   name: ansible
   lint:
