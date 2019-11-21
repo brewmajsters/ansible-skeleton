@@ -41,6 +41,7 @@
       - gnupg
       - sudo
       - python3-psycopg2
+      - ca-certificates
   pre_tasks:
     - name: RAW | install python3 on target
       become: true
@@ -59,7 +60,7 @@
       loop: "{{ ansible_dependencies }}"
 
   roles:
-    - role: postgresql
+    - role: timescaledb
     - role: brewmaster-backend
       vars:
         repo:

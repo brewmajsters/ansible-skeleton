@@ -9,6 +9,7 @@
       - gnupg
       - python3-psycopg2
       - sudo
+      - ca-certificates
   tasks:
     - name: install python3
       raw: "apt update && apt install -y python3"
