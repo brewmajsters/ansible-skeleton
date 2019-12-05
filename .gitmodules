@@ -1,3 +1,12 @@
 [submodule "roles/contrib/pip"]
 	path = roles/contrib/pip
 	url = https://github.com/Provizanta/ansible-role-pip.git
+[submodule "roles/ansible-role-brewmaster-backend"]
+	path = roles/ansible-role-brewmaster-backend
+	url = https://github.com/brewmajsters/ansible-role-brewmaster-backend
+[submodule "roles/ansible-role-brewmaster-frontend"]
+	path = roles/ansible-role-brewmaster-frontend
+	url = https://github.com/brewmajsters/ansible-role-brewmaster-frontend
+[submodule "roles/ansible-role-timescaledb"]
+	path = roles/ansible-role-timescaledb
+	url = https://github.com/brewmajsters/ansible-role-timescaledb
