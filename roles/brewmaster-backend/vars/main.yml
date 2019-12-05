@@ -1,6 +1,0 @@
----
-# vars file for brewmaster-backend
-
-dependencies:
-  - git
-  - libpq-dev
