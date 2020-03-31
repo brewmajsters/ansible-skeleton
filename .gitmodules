@@ -10,3 +10,9 @@
 [submodule "roles/ansible-role-brewmaster-backend"]
 	path = roles/ansible-role-brewmaster-backend
 	url = https://github.com/brewmajsters/ansible-role-brewmaster-backend
+[submodule "roles/ansible-role-mqtt"]
+	path = roles/ansible-role-mqtt
+	url = https://github.com/brewmajsters/ansible-role-mqtt
+[submodule "roles/ansible-role-docker"]
+	path = roles/ansible-role-docker
+	url = https://github.com/brewmajsters/ansible-role-docker
