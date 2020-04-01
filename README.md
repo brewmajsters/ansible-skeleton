@@ -2,11 +2,10 @@
 
 All roles and playbooks required to fully deploy our system components
 
-## clone
+## clone and update
 
-```bash
-git clone --recurese-submodules <url>
-```
+clone: `git clone --recurese-submodules <url>`
+update: `git pull --recurse-submodules`
 
 ## Usage prerequisites
 
@@ -39,9 +38,3 @@ ansible-playbook playbooks/dev/brewmasters_backend.yml
 - runs a playbook in 'diff' mode. Shows differences in configuration files and other
 
 refer to other options in the official [ansible-playbook docs](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
-
-## Update
-
-```bash
-git pull --recurse-submodules
-```
