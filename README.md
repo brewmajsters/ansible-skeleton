@@ -2,23 +2,31 @@
 
 All roles and playbooks required to fully deploy our system components
 
+## clone
+
+```bash
+git clone --recurese-submodules <url>
+```
+
 ## Usage prerequisites
 
-- ensure Ansible is present on management host
-    ```bash
-    pip3 install ansible
-    ```
-- target host accessible over SSH
+- ensure Ansible is present on management host:
+```bash
+pip3 install ansible
+```
+- target host(s) accessible over SSH (or other possible [connection protocol](https://docs.ansible.com/ansible/latest/plugins/connection.html))
+- all hosts are [configured](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) in the inventory file [hosts](./inventory/hosts)
 
-## Usage
+## Example usage
 
 ```bash
 cd ansible-skeleton/
-ansible-playbook [-i <path_to_inventory_file>] playbooks/<path_to_playbook> [-KCD]
+ansible-playbook playbooks/dev/brewmasters_backend.yml
 ```
 
-`'-i' option`
-- specifies the path to a [inventory file](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
+### usefull options
+`'-i <path_to_inventory>' option`
+- specifies the path to an inventory file
 - contains all target hostnames ([example inventory](inventory/prod/hosts))
 
 `'-K' option`
@@ -29,6 +37,8 @@ ansible-playbook [-i <path_to_inventory_file>] playbooks/<path_to_playbook> [-KC
 
 `'-D' option`
 - runs a playbook in 'diff' mode. Shows differences in configuration files and other
+
+refer to other options in the official [ansible-playbook docs](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 
 ## Update
 
