@@ -12,14 +12,5 @@
 
     - name: Gather facts
       setup:
-
-    # - name: APT | install ansible module requirements
-    #   become: true
-    #   apt:
-    #     name: "{{ item }}"
-    #     update_cache: true
-    #     state: present
-    #   loop: "{{ ansible_dependencies }}"
-
   roles:
     - ansible-role-mqtt
