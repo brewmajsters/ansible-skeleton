@@ -1,0 +1,7 @@
+---
+
+ansible_dependencies:
+  - gnupg
+  - sudo
+  - python3-psycopg2
+  - ca-certificates

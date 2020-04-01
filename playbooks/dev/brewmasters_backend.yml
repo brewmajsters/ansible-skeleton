@@ -36,12 +36,6 @@
 
 - hosts: raspbian
   gather_facts: false
-  vars:
-    ansible_dependencies:
-      - gnupg
-      - sudo
-      - python3-psycopg2
-      - ca-certificates
   pre_tasks:
     - name: RAW | install python3 on target
       become: true
