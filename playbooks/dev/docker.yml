@@ -1,0 +1,5 @@
+---
+
+- hosts: pseudo-raspbian
+  roles:
+    - ansible-role-docker
