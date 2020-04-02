@@ -16,6 +16,23 @@ pip3 install ansible
 - target host(s) accessible over SSH (or other possible [connection protocol](https://docs.ansible.com/ansible/latest/plugins/connection.html))
 - all hosts are [configured](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) in the inventory file [hosts](./inventory/hosts)
 
+## Development setup (Linux only)
+
+Development playbooks are in the [dev](./playbooks/dev) directory. These playbooks are dependent on an existing LXC container defined in the [hosts file](./inventory/hosts).
+
+- setup `lxd` (e.g. [ansible-role-lxd](https://github.com/Provizanta/ansible-role-lxd))
+- run the [dev_container.yml](./playbooks/dev/dev_container.yml) playbook
+    - it creates and starts the dev container 'pseudo-raspbian'
+
+Know you have a running instance of a Debian buster LXC container, which will host all applications.
+
+## Alternative development setup
+
+If you're not on Linux or you don't want to use LXC containers.
+
+- modify the [hosts file](./inventory/hosts) to your need
+- change the target host in each playbook you use
+
 ## Example usage
 
 ```bash
