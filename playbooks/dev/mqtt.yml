@@ -1,16 +1,7 @@
 ---
 
-- hosts: pseudo-raspbian
-  gather_facts: false
-  pre_tasks:
-    - name: RAW | install python3 on target
-      become: true
-      raw: >
-        test -e {{ ansible_python_interpreter }} ||
-        apt -y update && apt install -y python3
-      tags: install
+# the following is for MQTT deployment to the newly created container
 
-    - name: Gather facts
-      setup:
+- hosts: pseudo-raspbian
   roles:
     - ansible-role-mqtt

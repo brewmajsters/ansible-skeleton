@@ -1,5 +1,7 @@
 ---
 
+# the following is for dev LXC container deployment
+
 - hosts: localhost
   vars:
     distro: debian/buster/amd64
@@ -19,3 +21,20 @@
         wait_for_ipv4_addresses: true
         timeout: 600
       register: lxd_info
+
+- hosts: pseudo-raspbian:
+  tasks:
+    - name: RAW | install python3 on target
+      become: true
+      raw: >
+        test -e {{ ansible_python_interpreter }} ||
+        apt -y update && apt install -y python3
+      tags: install
+
+    - name: APT | install ansible module requirements
+      become: true
+      apt:
+        name: "{{ item }}"
+        update_cache: true
+        state: present
+      loop: "{{ ansible_dependencies }}"

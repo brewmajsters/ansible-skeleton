@@ -1,5 +1,7 @@
 ---
 
+# the following is for TimescaleDB deployment to the newly created container
+
 - hosts: pseudo-raspbian
   roles:
     - ansible-role-timescaledb
