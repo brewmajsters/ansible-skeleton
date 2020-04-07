@@ -1,0 +1,11 @@
+---
+
+# the following is for backend deployment to the newly created container
+
+- hosts: pseudo-raspbian
+  roles:
+    - role: ansible-role-timescaledb
+    - role: ansible-role-brewmaster-backend
+      vars:
+        backend_environments:
+          DATABASE_PASSWORD: brewmasters

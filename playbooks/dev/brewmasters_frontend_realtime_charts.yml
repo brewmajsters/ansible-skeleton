@@ -1,0 +1,10 @@
+---
+
+# the following is for frontend deployment to the newly created container
+
+- hosts: pseudo-raspbian
+  roles:
+    - role: brewmaster-frontend
+      vars:
+        repo:
+          version: "realtime_charts"

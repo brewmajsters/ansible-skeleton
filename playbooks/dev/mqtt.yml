@@ -1,0 +1,7 @@
+---
+
+# the following is for MQTT deployment to the newly created container
+
+- hosts: pseudo-raspbian
+  roles:
+    - ansible-role-mqtt
