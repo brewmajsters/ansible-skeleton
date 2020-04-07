@@ -22,7 +22,7 @@
         timeout: 600
       register: lxd_info
 
-- hosts: pseudo-raspbian:
+- hosts: pseudo-raspbian
   tasks:
     - name: RAW | install python3 on target
       become: true
