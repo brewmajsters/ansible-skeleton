@@ -1,0 +1,16 @@
+---
+
+# MQTT variables
+
+# TimeScaleDB variables
+debian_postgresql_database_user: postgres
+debian_postgresql_database_password: brewmaster
+debian_postgresql_database_name: brewmaster
+
+# Backend aplication variables
+backend_environments:
+  DATABASE_USER: postgres
+  DATABASE_PASSWORD: "{{ debian_postgresql_database_password }}"
+  DATABSE_NAME: brewmaster
+
+# Frontend aplication variables
