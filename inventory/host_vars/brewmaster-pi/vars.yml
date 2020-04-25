@@ -12,5 +12,7 @@ backend_environments:
   DATABASE_USER: postgres
   DATABASE_PASSWORD: "{{ debian_postgresql_database_password }}"
   DATABSE_NAME: brewmaster
+  SERVER_HOST: "0.0.0.0"
+  BROKER_HOST: localhost
 
 # Frontend aplication variables
