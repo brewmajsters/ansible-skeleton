@@ -1,0 +1,61 @@
+---
+
+- hosts: brewmaster-pi
+  pre_tasks:
+    - name: upgrade system
+      become: true
+      apt:
+        update_cache: true
+        upgrade: safe
+
+    - name: dist upgrade
+      become: true
+      apt:
+        upgrade: dist
+
+    - name: install ansible dependencies
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ ansible_dependencies }}"
+  roles:
+    - ansible-role-mqtt
+    - ansible-role-docker
+
+- hosts: brewmaster-pi
+  vars:
+    timescaldb_docker_path: /opt/timescaledb-docker
+  pre_tasks:
+    - name: timescaledb | git clone timescaledb docker repository
+      become: true
+      git:
+        repo: "https://github.com/brewmajsters/timescaledb-docker"
+        dest: "{{ timescaldb_docker_path }}"
+
+    - name: timescaledb | build timescaldb docker image
+      become: true
+      docker_image:
+        name: timescaledb
+        tag: latest
+        path: "{{ timescaldb_docker_path }}"
+        state: present
+
+    - name: timescaledb | run timescaldb docker container
+      become: true
+      docker_container:
+        name: timescaledb
+        image: timescaledb:latest
+        state: started
+        ports:
+          - 5432:5432
+  roles:
+    - ansible-role-brewmaster-backend
+    - ansible-role-brewmaster-frontend
+  post_tasks:
+    - name: install ansible dependencies
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ansible_dependencies }}"
