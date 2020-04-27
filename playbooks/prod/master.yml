@@ -52,10 +52,3 @@
   roles:
     - ansible-role-brewmaster-backend
     - ansible-role-brewmaster-frontend
-  post_tasks:
-    - name: install ansible dependencies
-      become: true
-      apt:
-        name: "{{ item }}"
-        state: absent
-      loop: "{{ ansible_dependencies }}"
