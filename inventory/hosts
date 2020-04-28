@@ -4,5 +4,14 @@ all:
       ansible_connection: local
     pseudo-raspbian:
       ansible_connection: lxd
+    brewmaster-pi:
   vars:
     ansible_python_interpreter: /usr/bin/python3
+  children:
+    prod-brewmaster:
+      hosts:
+        brewmaster-pi:
+          ansible_user: pi
+    dev-brewmaster:
+      hosts:
+        pseudo-raspbian:
