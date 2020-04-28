@@ -1,0 +1,19 @@
+---
+
+# MQTT variables
+
+# TimeScaleDB variables
+debian_postgresql_database_user: postgres
+debian_postgresql_database_password: brewmaster
+debian_postgresql_database_name: brewmaster
+
+# Backend aplication variables
+backend_environments:
+  DATABASE_USER: postgres
+  DATABASE_PASSWORD: "{{ debian_postgresql_database_password }}"
+  DATABSE_NAME: brewmaster
+  SERVER_HOST: "0.0.0.0"
+  BROKER_HOST: localhost
+
+# Frontend aplication variables
+frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"
