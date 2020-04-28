@@ -16,3 +16,4 @@ backend_environments:
   BROKER_HOST: localhost
 
 # Frontend aplication variables
+frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"

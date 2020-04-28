@@ -50,7 +50,5 @@
         ports:
           - 5432:5432
   roles:
-    - role: ansible-role-brewmaster-backend
-    - role: ansible-role-brewmaster-frontend
-      vars:
-        frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"
+    - ansible-role-brewmaster-backend
+    - ansible-role-brewmaster-frontend
