@@ -20,24 +20,49 @@ pip3 install ansible
 
 Development playbooks are in the [dev](./playbooks/dev) directory. These playbooks are dependent on an existing LXC container defined in the [hosts file](./inventory/hosts).
 
+**REQUIREMENTS**:
 - setup `lxd` (e.g. [ansible-role-lxd](https://github.com/Provizanta/ansible-role-lxd))
 - run the [dev_container.yml](./playbooks/dev/dev_container.yml) playbook
     - it creates and starts the dev container 'pseudo-raspbian'
 
-Know you have a running instance of a Debian buster LXC container, which will host all applications.
+Now you have a running instance of a Debian buster LXC container, which will host all applications.
 
-## Alternative development setup
+**DEPLOYMENT**
+- run any of the dev playbooks as specified in the Exmaple on the bottom of this README.
+
+### Alternative development setup
 
 If you're not on Linux or you don't want to use LXC containers.
 
 - modify the [hosts file](./inventory/hosts) to your need
 - change the target host in each playbook you use
 
+## Production setup (meant for Raspberry pi only)
+
+Production playbooks are in the [prod](./playbooks/prod) directory. These playbooks are dependent on a accessible Raspberry pi.
+
+**REQUIREMENTS**:
+- Raspberry pi accessible over SSH host `brewmaster-pi` as specified in the [hosts file](./inventory/hosts). (configured in `~/.ssh/config` on the ansible host)
+    - NOTE: this requirement is more specific to eliminate any skeleton modifications
+```bash
+Host brewmaster-pi
+  Hostname 192.168.0.22
+  Port 22
+  User pi
+```
+
+
+**DEPLOYMENT**
+- use the [master playbook](./playbooks/prod/master.yml) to deploy the whole brewmaster system
+- possible role variables can be configured in the [host variables](./inventory/host_vars/brewmaster-pi/vars.yml)
+
 ## Example usage
 
 ```bash
 cd ansible-skeleton/
 ansible-playbook playbooks/dev/brewmasters_backend.yml
+# or
+ansible-playbook playbooks/prod/master.yml
 ```
 
 ### usefull options
