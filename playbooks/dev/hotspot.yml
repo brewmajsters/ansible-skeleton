@@ -1,0 +1,5 @@
+---
+
+- hosts: brewmaster-pi
+  roles:
+    - role: ansible-role-hotspot
