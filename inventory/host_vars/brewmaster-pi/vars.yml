@@ -17,3 +17,7 @@ backend_environments:
 
 # Frontend aplication variables
 frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"
+
+frontend_environments:
+  BACKEND_HOST: 192.168.0.81
+  BACKEND_PORT: 5000
