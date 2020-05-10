@@ -23,3 +23,9 @@ frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-lin
 frontend_environments:
   BACKEND_HOST: 192.168.0.80
   BACKEND_PORT: 5000
+
+# TimescaleDB seed variables
+database_servo_module_mac: "CC:50:E3:95:DC:24"
+database_h300_module_mac: "CC:50:E3:96:19:7C"
+database_rele_module_mac: "CC:50:E3:AA:AA:AA"  # TODO
+database_thermometer_module_mac: "CC:50:E3:95:D6:D0"
