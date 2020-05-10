@@ -1,0 +1,27 @@
+---
+
+- hosts: brewmaster-pi
+  vars:
+    postgresql_seed_scripts:
+      - seed_db_init.sql
+      - seed_db_servo.sql
+      - seed_db_h300.sql
+      - seed_db_rele.sql
+      - seed_db_thermometer.sql
+    postgresql_seed_dest: "/tmp/db_seeds"
+  pre_tasks:
+    - debug:
+        msg: "This playbook requires a running TimescaleDB instance on specified socket."
+
+  tasks:
+    - name: copy SQL scripts to remote
+      template:
+        src: "{{ item }}"
+        dest: "{{ postgresql_seed_dest }}/{{ item }}"
+      loop: "{{ postgresql_seed_scripts }}"
+
+    - name: run SQL scripts on remote
+      postgresql_query:
+        db: "{{ debian_postgresql_database_name }}"
+        query: "{{ postgresql_seed_dest }}/{{ item }}"
+      loop: "{{ postgresql_seed_scripts }}"
