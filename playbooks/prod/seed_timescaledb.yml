@@ -1,0 +1,62 @@
+---
+
+- hosts: brewmaster-pi
+  vars:
+    postgresql_seed_scripts:
+      - seed_db_init.sql
+      - seed_db_servo.sql
+      - seed_db_h300.sql
+      - seed_db_rele.sql
+      - seed_db_thermometer.sql
+    # the order matters
+    postgresql_target_tables:
+      - devices
+      - device_type_datapoints
+      - module_notifications
+      - modules
+      - module_device_types
+      - protocols
+      - data_types
+    postgresql_seed_dest: "/tmp/db_seeds"
+    overwrite: true
+  pre_tasks:
+    - debug:
+        msg: >
+          This playbook requires a running TimescaleDB instance on specified
+          socket.
+  tasks:
+    - name: create dir
+      file:
+        name: "{{ postgresql_seed_dest }}"
+        state: directory
+
+    - name: copy SQL scripts to remote
+      template:
+        src: "{{ item }}"
+        dest: "{{ postgresql_seed_dest }}/{{ item }}"
+      loop: "{{ postgresql_seed_scripts }}"
+
+    - name: delete all configuration tables
+      when: overwrite
+      become_user: "{{ debian_postgresql_database_user }}"
+      postgresql_query:
+        login_host: localhost
+        login_password: "{{ debian_postgresql_database_password }}"
+        db: "{{ debian_postgresql_database_name }}"
+        query: "delete from {{ item }};"
+      loop: "{{ postgresql_target_tables }}"
+
+    - name: run SQL scripts on remote
+      become_user: "{{ debian_postgresql_database_user }}"
+      postgresql_query:
+        login_host: localhost
+        login_password: "{{ debian_postgresql_database_password }}"
+        db: "{{ debian_postgresql_database_name }}"
+        path_to_script: "{{ postgresql_seed_dest }}/{{ item }}"
+      loop: "{{ postgresql_seed_scripts }}"
+
+    - name: restart backend to read new configuration
+      become: true
+      service:
+        name: backend
+        state: restarted
