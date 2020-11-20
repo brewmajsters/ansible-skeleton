@@ -25,27 +25,33 @@
 
 - hosts: brewmaster-pi
   vars:
-    timescaldb_docker_path: /opt/timescaledb-docker
+    timescaledb_docker_path: /opt/timescaledb-docker
   pre_tasks:
     - name: timescaledb | git clone timescaledb docker repository
       become: true
       git:
         repo: "https://github.com/brewmajsters/timescaledb-docker"
-        dest: "{{ timescaldb_docker_path }}"
+        dest: "{{ timescaledb_docker_path }}"
+
+    - name: retrieve latest version of the timescaledb
+      shell: "git tag -l | tail -1"
+      args:
+        chdir: "{{ timescaledb_docker_path }}"
+      register: timescaledb_docker_version
 
     - name: timescaledb | build timescaldb docker image
       become: true
       docker_image:
         name: timescaledb
-        tag: latest
-        path: "{{ timescaldb_docker_path }}"
+        tag: "{{ timescaledb_docker_version.stdout }}"
+        path: "{{ timescaledb_docker_path }}"
         state: present
 
     - name: timescaledb | run timescaldb docker container
       become: true
       docker_container:
         name: timescaledb
-        image: timescaledb:latest
+        image: "timescaledb:{{ timescaledb_docker_version.stdout }}"
         state: started
         ports:
           - 5432:5432

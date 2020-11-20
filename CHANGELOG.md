@@ -5,6 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- ansible-role-hotspot
+- development playbook for hotspot + dhcp server
+- ansible-role-brewmaster-frontend:
+    - API update - incorporate brewmaster-frontend new environment variables
+
+- timescaledb seeding
+    - playbook
+    - seed sql files
+
+- more required frontend environment variables
+
+### Changed
+- timescaledb docker tasks:
+    - build docker image with tag of latest git repo tag
 
 ## [1.1.0] - 2020-04-28
 ### Added

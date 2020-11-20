@@ -16,3 +16,6 @@
 [submodule "roles/ansible-role-docker"]
 	path = roles/ansible-role-docker
 	url = https://github.com/brewmajsters/ansible-role-docker
+[submodule "roles/ansible-role-hotspot"]
+	path = roles/ansible-role-hotspot
+	url = https://github.com/brewmajsters/ansible-role-hotspot
