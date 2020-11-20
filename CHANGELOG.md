@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - playbook
     - seed sql files
 
+- more required frontend environment variables
+
 ### Changed
 - timescaledb docker tasks:
     - build docker image with tag of latest git repo tag
