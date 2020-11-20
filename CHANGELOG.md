@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ansible-role-brewmaster-frontend:
     - API update - incorporate brewmaster-frontend new environment variables
 
+- timescaledb seeding
+    - playbook
+    - seed sql files
+
 ### Changed
 - timescaledb docker tasks:
     - build docker image with tag of latest git repo tag
