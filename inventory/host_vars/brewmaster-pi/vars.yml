@@ -23,9 +23,18 @@ frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-lin
 frontend_environments:
   BACKEND_HOST: 192.168.0.80
   BACKEND_PORT: 5000
+  MOTOR_ID: 54f01897-04b8-4404-b6f6-cf6a29cd3cc6
+  MOTOR_UUID: 602a9903-c090-43e1-b0b4-e87a3c1c32f5
+  MOTOR_DATAPOINT: MAIN_FREQUENCY
+  MOTOR_DATAPOINT_SET: SPEED
+  MOTOR_MODULE_ID: 1a08c97d-67f0-4c04-b7ff-75f676e98f35
+  SERVO_ID: f0ba623f-2af0-46a5-a519-a8daf29263ac
+  SERVO_UUID: 95638296-e8d8-47dc-bf8d-a3cf10b1cd41
+  SERVO_DATAPOINT: ANGLE
+  SERVO_MODULE_ID: 2619cd20-49dc-4226-92ff-4d848b276a63
 
 # TimescaleDB seed variables
 database_servo_module_mac: "CC:50:E3:95:DC:24"
 database_h300_module_mac: "CC:50:E3:96:19:7C"
-database_rele_module_mac: "CC:50:E3:AA:AA:AA"  # TODO
+database_rele_module_mac: "24:62:AB:D6:E3:B4"
 database_thermometer_module_mac: "CC:50:E3:95:D6:D0"
