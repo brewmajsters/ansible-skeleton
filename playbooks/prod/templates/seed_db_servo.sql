@@ -11,5 +11,4 @@ INSERT INTO modules (id, mac, module_device_type_id) VALUES
 ('2619cd20-49dc-4226-92ff-4d848b276a63', '{{ database_servo_module_mac }}', (select id from module_device_types where model = 'S05NF_STD'));
 
 INSERT INTO devices (id, uuid, address, poll_rate, module_id) VALUES
-('f0ba623f-2af0-46a5-a519-a8daf29263ac', '95638296-e8d8-47dc-bf8d-a3cf10b1cd41', 13, 60, (select id from modules where mac = '{{ database_servo_module_mac }}')),
-('67849111-e90d-46b8-a16f-1dae5e613fb0', '44702335-a7f0-4ef1-b9c6-b10cea9496b8', 14, 60, (select id from modules where mac = '{{ database_servo_module_mac }}'));
+('f0ba623f-2af0-46a5-a519-a8daf29263ac', '95638296-e8d8-47dc-bf8d-a3cf10b1cd41', 13, 60, (select id from modules where mac = '{{ database_servo_module_mac }}'));
