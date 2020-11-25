@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- redesign the inventory groups and hosts
+    - move old inventory to sub-inventory brewmaster
+
+### Added
+- pillcrusher dedicated inventory
+- timescaledb docker container
+    - timezone and local time volumes - `/etc/timezone` and `/etc/localtime`
+    - always build image with 'latest' tag and pull latest base timescale image
+    - always create container from 'latest' tag
 
 ## [1.2.0] - 2020-11-20
 ### Added

@@ -26,6 +26,7 @@
 - hosts: brewmaster-pi
   vars:
     timescaledb_docker_path: /opt/timescaledb-docker
+    update_timescaledb_base_image: true
   pre_tasks:
     - name: timescaledb | git clone timescaledb docker repository
       become: true
@@ -42,17 +43,25 @@
     - name: timescaledb | build timescaldb docker image
       become: true
       docker_image:
+        pull: "{{ update_timescaledb_base_image }}"
         name: timescaledb
         tag: "{{ timescaledb_docker_version.stdout }}"
         path: "{{ timescaledb_docker_path }}"
         state: present
 
+    - name: timescaledb | link latest image to new version
+      become: true
+      command: "docker image tag timescaledb:{{ timescaledb_docker_version.stdout }} timescaledb:latest"
+
     - name: timescaledb | run timescaldb docker container
       become: true
       docker_container:
         name: timescaledb
-        image: "timescaledb:{{ timescaledb_docker_version.stdout }}"
+        image: "timescaledb:latest"
         state: started
+        volumes:
+          - /etc/localtime:/etc/localtime:ro
+          - /etc/timezone:/etc/timezone:ro
         ports:
           - 5432:5432
   roles:

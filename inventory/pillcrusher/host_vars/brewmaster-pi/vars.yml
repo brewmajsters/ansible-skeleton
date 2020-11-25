@@ -1,0 +1,31 @@
+---
+
+# MQTT variables
+
+# TimeScaleDB variables
+debian_postgresql_database_user: postgres
+debian_postgresql_database_password: brewmaster
+debian_postgresql_database_name: brewmaster
+
+# Backend aplication variables
+backend_environments:
+  RUN_ENVIRONMENT: production
+  DATABASE_USER: postgres
+  DATABASE_PASSWORD: "{{ debian_postgresql_database_password }}"
+  DATABSE_NAME: brewmaster
+  SERVER_HOST: "0.0.0.0"
+  SERVER_PORT: 5000
+  BROKER_HOST: localhost
+
+# Frontend aplication variables
+frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"
+
+frontend_environments:
+  BACKEND_HOST: 127.0.0.1
+  BACKEND_PORT: 5000
+  ENGINE_ID: 81418c0b-04ba-49d4-96ad-7139f8f4853b
+  ENGINE_MODULE_ID: 7cc032fd-59cf-496e-b25e-4503a9fec8cc
+  ENGINE_MOTION_SET_DATAPOINT: 44b24dd6-1d1b-413d-a18a-6286dbbb8a4e
+
+# TimescaleDB seed variables
+database_h300_module_mac: "CC:50:E3:96:19:7C"
