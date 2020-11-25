@@ -22,6 +22,7 @@
   roles:
     - ansible-role-mqtt
     - ansible-role-docker
+    - ansible-role-hotspot
 
 - hosts: brewmaster-pi
   vars:
