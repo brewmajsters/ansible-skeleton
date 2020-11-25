@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - always build image with 'latest' tag and pull latest base timescale image
     - always create container from 'latest' tag
 
+### Fixed
+- ansible-role-brewmaster-frontend
+
 ## [1.2.0] - 2020-11-20
 ### Added
 - ansible-role-hotspot
