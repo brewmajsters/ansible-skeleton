@@ -21,7 +21,7 @@ backend_environments:
 frontend_nodejs_archive_url: "https://nodejs.org/dist/v12.16.2/node-v12.16.2-linux-armv7l.tar.gz"
 
 frontend_environments:
-  BACKEND_HOST: 192.168.0.80
+  BACKEND_HOST: 127.0.0.1
   BACKEND_PORT: 5000
   MOTOR_ID: 54f01897-04b8-4404-b6f6-cf6a29cd3cc6
   MOTOR_UUID: 602a9903-c090-43e1-b0b4-e87a3c1c32f5

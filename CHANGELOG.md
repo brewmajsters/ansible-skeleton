@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - redesign the inventory groups and hosts
     - move old inventory to sub-inventory brewmaster
 
+- both backend and frontend listen address in pillcrusher inventory
+
 ### Added
 - pillcrusher dedicated inventory
 - timescaledb docker container
@@ -17,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - always create container from 'latest' tag
 
 ### Fixed
-- ansible-role-brewmaster-frontend
+- ansible-role-brewmaster-frontend and ansible-role-brewmaster-backend
+    - new variable structure and add parametrize frontend listen address
 
 ## [1.2.0] - 2020-11-20
 ### Added
