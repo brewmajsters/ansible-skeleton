@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - always build image with 'latest' tag and pull latest base timescale image
     - always create container from 'latest' tag
 
+- systemd unit file options to backend and frontend
+    - restart policy
+    - install section for enabling the service on startup
+    - setup presedence in service activation ('After' keyword)
+
 ### Fixed
 - ansible-role-brewmaster-frontend and ansible-role-brewmaster-backend
     - new variable structure and add parametrize frontend listen address
