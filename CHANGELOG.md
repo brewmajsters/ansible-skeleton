@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - install section for enabling the service on startup
     - setup presedence in service activation ('After' keyword)
 
+- pillcrusher browser setup
+    - systemd unit file starting the browser with frontend on startup
+    - additional configuration - user permissions, browser scale factor
+
 ### Fixed
 - ansible-role-brewmaster-frontend and ansible-role-brewmaster-backend
     - new variable structure and add parametrize frontend listen address

@@ -28,6 +28,8 @@ frontend_environments:
   ENGINE_MOTION_SET_DATAPOINT: 44b24dd6-1d1b-413d-a18a-6286dbbb8a4e
 
 frontend_listen_address: 10.77.10.100
+frontend_browser_website: "http://{{ frontend_listen_address }}/"
+frontend_browser_scale_factor: 0.7
 
 # TimescaleDB seed variables
 database_h300_module_mac: "CC:50:E3:96:19:7C"

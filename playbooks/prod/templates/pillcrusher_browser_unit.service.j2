@@ -1,0 +1,12 @@
+[Unit]
+Description=Frontend in browser
+PartOf=graphical.target
+After=frontend.service network.target
+
+[Service]
+ExecStart=/usr/bin/chromium-browser --kiosk "{{ frontend_browser_website }}"
+Restart=always
+Type=idle
+
+[Install]
+WantedBy=graphical.target default.target

@@ -1,0 +1,39 @@
+---
+# https://www.unixsysadmin.com/systemd-user-services/
+
+- hosts: brewmaster-pi
+  tasks:
+    - name: configure browser scale factor
+      template:
+        src: chromium_browser_default.j2
+        dest: /etc/chromium-browser/default
+
+    - name: copy browser unit file
+      template:
+        src: pillcrusher_browser_unit.service.j2
+        dest: "{{ ansible_env.HOME }}/.config/systemd/user/pillcrusher.service"
+      register: unit_file
+
+    - when: unit_file.changed
+      block:
+        - name: daemon reload
+          systemd:
+            user: true
+            daemon_reload: true
+        - name: restart service
+          systemd:
+            user: true
+            name: pillcrusher
+            state: restarted
+
+    - name: give user {{ ansible_user }} permissions to run services when not logged in
+      become: true
+      changed_when: false
+      command: "loginctl enable-linger {{ ansible_user }}"
+
+    - name: ensure the browser service is started and enabled
+      systemd:
+        user: true
+        name: pillcrusher
+        state: started
+        enabled: true
