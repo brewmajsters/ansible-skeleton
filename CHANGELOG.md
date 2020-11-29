@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - systemd unit file starting the browser with frontend on startup
     - additional configuration - user permissions, browser scale factor
 
+- add restart policy to timescaledb docker container
+    - ensures the container starts on system startup
+
 ### Fixed
 - ansible-role-brewmaster-frontend and ansible-role-brewmaster-backend
     - new variable structure and add parametrize frontend listen address

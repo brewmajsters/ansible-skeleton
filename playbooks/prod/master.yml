@@ -60,6 +60,7 @@
         name: timescaledb
         image: "timescaledb:latest"
         state: started
+        restart_policy: always  # starts the container always, when it fails
         volumes:
           - /etc/localtime:/etc/localtime:ro
           - /etc/timezone:/etc/timezone:ro
